@@ -26,17 +26,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSetListener {
+public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetListener {
 
     private Context context;
-    private EditText name, code, phone;
+    private EditText name, code, phone,sPhone;
     private TextView bDate, wDate;
     private boolean isBirthday =false;
     private MaterialButton register,cancel;
     private ImageView close;
 
 
-    public RegisterDialog(@NonNull Context context) {
+    public BrideDialog(@NonNull Context context) {
         super(context);
         this.context = context;
 
@@ -46,7 +46,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.dialog_register);
+        setContentView(R.layout.dialog_bride);
         init();
     }
 
@@ -56,6 +56,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
         bDate = findViewById(R.id.reg_bd);
         wDate = findViewById(R.id.reg_wd);
         phone = findViewById(R.id.reg_number);
+        sPhone = findViewById(R.id.reg_sn);
 
         close = findViewById(R.id.reg_close);
         cancel = findViewById(R.id.reg_cancel);
@@ -117,12 +118,13 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
             String b = bDate.getText().toString();
             String w = wDate.getText().toString();
             String p = phone.getText().toString();
+            String s = sPhone.getText().toString();
 
             if (n.isEmpty() || p.isEmpty() || p.length() < 11) {
                 Toast.makeText(context, "لطفا نام و نام خانوادگی/ شماره تلفن را بررسی کنید", Toast.LENGTH_SHORT).show();
             } else {
                 if (Utils.checkInternet(context))
-                    reg(n, c, b, w, p);
+                    reg(n, c, b, w, p,s);
                 else
                     Toast.makeText(context, "لطفا دسترسی به اینترنت را چک کنید!", Toast.LENGTH_SHORT).show();
 
@@ -141,7 +143,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
             wDate.setText(date);
     }
 
-    private void reg(String name, String code, String birthday, String weddingDate, String phone) {
+    private void reg(String name, String code, String birthday, String weddingDate, String phone, String sPhone) {
         close.setEnabled(false);
         cancel.setEnabled(false);
         register.setEnabled(false);
@@ -156,7 +158,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
         }
 
         RetrofitClient.getInstance().getApi()
-                .register(name,phone,"",birthday,weddingDate,code,false)
+                .register(name,phone,sPhone,birthday,weddingDate,code,true)
                 .enqueue(new Callback<GeneralResponse>() {
                     @Override
                     public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {

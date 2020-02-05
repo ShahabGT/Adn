@@ -19,12 +19,13 @@ import android.view.WindowManager;
 import com.google.android.material.card.MaterialCardView;
 
 import ir.shahabazimi.hairdresser.R;
+import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
 import ir.shahabazimi.hairdresser.dialogs.RegisterDialog;
 
 
 public class MainFragment extends Fragment {
 
-    private MaterialCardView reg;
+    private MaterialCardView reg,bride;
 
 
 
@@ -42,6 +43,7 @@ public class MainFragment extends Fragment {
 
     private void init(View v){
         reg = v.findViewById(R.id.main_reg);
+        bride = v.findViewById(R.id.main_bride);
 
 
         onClicks(v);
@@ -50,6 +52,18 @@ public class MainFragment extends Fragment {
     private void onClicks(View v){
         reg.setOnClickListener(w->{
             RegisterDialog dialog = new RegisterDialog(getContext());
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            dialog.getWindow().setGravity(Gravity.CENTER);
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        });
+
+        bride.setOnClickListener(w->{
+            BrideDialog dialog = new BrideDialog(getContext());
             dialog.setCanceledOnTouchOutside(true);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;

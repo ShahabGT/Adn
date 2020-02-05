@@ -14,6 +14,7 @@ public interface Api {
     Call<GeneralResponse> register(
             @Field("name") String name,
             @Field("number") String number,
+            @Field("snumber") String snumber,
             @Field("bday") String birthday,
             @Field("mday") String weddingDate,
             @Field("code") String code,
