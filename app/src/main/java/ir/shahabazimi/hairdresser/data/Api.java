@@ -1,5 +1,7 @@
 package ir.shahabazimi.hairdresser.data;
 
+import java.util.ArrayList;
+
 import ir.shahabazimi.hairdresser.models.GeneralResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -14,10 +16,35 @@ public interface Api {
     Call<GeneralResponse> register(
             @Field("name") String name,
             @Field("number") String number,
-            @Field("snumber") String snumber,
             @Field("bday") String birthday,
             @Field("mday") String weddingDate,
-            @Field("code") String code,
-            @Field("isbride") boolean isBride
+            @Field("code") String code);
+
+    @FormUrlEncoded
+    @POST("bride.php")
+    Call<GeneralResponse> bride(
+            @Field("userid") String userId,
+            @Field("wday") String weddingDate,
+            @Field("cday") String contractDate,
+            @Field("snumber") String spouseNumber,
+            @Field("price") String price);
+
+    @FormUrlEncoded
+    @POST("buy.php")
+    Call<GeneralResponse> buy(
+            @Field("user_id") String userId,
+            @Field("amount") String amount,
+            @Field("wallet") String walley,
+            @Field("pay") String pay,
+            @Field("title[]") ArrayList<String> title,
+            @Field("price[]")ArrayList<String> price,
+            @Field("person[]")ArrayList<String> person
+    );
+
+
+    @FormUrlEncoded
+    @POST("search.php")
+    Call<GeneralResponse> search(
+            @Field("code") String code
     );
 }

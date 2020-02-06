@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/yellow"
     tools:context=".activities.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,8 +20,7 @@
             android:id="@+id/main_header_logo"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/logo"
-            android:tint="@android:color/white"
+            android:src="@drawable/adn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -123,7 +122,6 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
         android:soundEffectsEnabled="true"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline4"

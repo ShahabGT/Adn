@@ -151,12 +151,13 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
 
         if(birthday.equals("انتخاب کنید")){
             birthday="";
-        }else if(weddingDate.equals("انتخاب کنید")){
+        }
+        if(weddingDate.equals("انتخاب کنید")){
             weddingDate="";
         }
 
         RetrofitClient.getInstance().getApi()
-                .register(name,phone,"",birthday,weddingDate,code,false)
+                .register(name,phone,birthday,weddingDate,code)
                 .enqueue(new Callback<GeneralResponse>() {
                     @Override
                     public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {

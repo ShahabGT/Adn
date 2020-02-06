@@ -3,6 +3,9 @@ package ir.shahabazimi.hairdresser.dialogs;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,11 +32,16 @@ import retrofit2.Response;
 public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetListener {
 
     private Context context;
-    private EditText name, code, phone,sPhone;
-    private TextView bDate, wDate;
-    private boolean isBirthday =false;
+    private EditText name, code,sPhone,price;
+    private TextView cDate, wDate;
+    private boolean isWeddingDate =false;
     private MaterialButton register,cancel;
     private ImageView close;
+
+    private String cName="";
+    private String cNumber="";
+    private String cId="";
+    private String cWallet="";
 
 
     public BrideDialog(@NonNull Context context) {
@@ -53,9 +61,9 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
     private void init() {
         name = findViewById(R.id.reg_name);
         code = findViewById(R.id.reg_code);
-        bDate = findViewById(R.id.reg_bd);
+        cDate = findViewById(R.id.reg_contract);
         wDate = findViewById(R.id.reg_wd);
-        phone = findViewById(R.id.reg_number);
+        price = findViewById(R.id.reg_price);
         sPhone = findViewById(R.id.reg_sn);
 
         close = findViewById(R.id.reg_close);
@@ -67,11 +75,34 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
     }
 
     private void onClicks() {
+
+        code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length()==4){
+                    searchCode(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()==4){
+                    searchCode(s.toString());
+                }
+            }
+        });
+
+
         close.setOnClickListener(x -> dismiss());
         cancel.setOnClickListener(x -> dismiss());
 
-        bDate.setOnClickListener(w->{
-            isBirthday =true;
+        wDate.setOnClickListener(w->{
+            isWeddingDate =true;
             PersianCalendar persianCalendar = new PersianCalendar();
             DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                     this::onDateSet,
@@ -90,8 +121,8 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
 
             datePickerDialog.show(((FragmentActivity)context).getFragmentManager(), "Datepickerdialog");
         });
-        wDate.setOnClickListener(w->{
-            isBirthday =false;
+        cDate.setOnClickListener(w->{
+            isWeddingDate =false;
             PersianCalendar persianCalendar = new PersianCalendar();
             DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                     this::onDateSet,
@@ -113,18 +144,19 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
 
         register.setOnClickListener(x -> {
             Utils.hideKeyboard(getOwnerActivity());
-            String n = name.getText().toString();
-            String c = code.getText().toString();
-            String b = bDate.getText().toString();
+            String c = cDate.getText().toString();
             String w = wDate.getText().toString();
-            String p = phone.getText().toString();
             String s = sPhone.getText().toString();
+            String p = price.getText().toString();
 
-            if (n.isEmpty() || p.isEmpty() || p.length() < 11) {
-                Toast.makeText(context, "لطفا نام و نام خانوادگی/ شماره تلفن را بررسی کنید", Toast.LENGTH_SHORT).show();
+            if(cName.isEmpty()) {
+                Toast.makeText(context, "لطفا کد مشتری را وارد کنید", Toast.LENGTH_SHORT).show();
+
+            }else if (w.isEmpty() ||c.isEmpty() || p.isEmpty()) {
+                Toast.makeText(context, "لطفا فرم را بررسی کنید", Toast.LENGTH_SHORT).show();
             } else {
                 if (Utils.checkInternet(context))
-                    reg(n, c, b, w, p,s);
+                    reg(c,w,s,p);
                 else
                     Toast.makeText(context, "لطفا دسترسی به اینترنت را چک کنید!", Toast.LENGTH_SHORT).show();
 
@@ -137,13 +169,42 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         String date = year+"/"+(monthOfYear+1)+"/"+dayOfMonth;
 
-        if(isBirthday)
-            bDate.setText(date);
-        else
+        if(isWeddingDate)
             wDate.setText(date);
+        else
+            cDate.setText(date);
     }
 
-    private void reg(String name, String code, String birthday, String weddingDate, String phone, String sPhone) {
+    private void searchCode(String code){
+        cName="";
+        cNumber="";
+        cId="";
+        cWallet="";
+
+        RetrofitClient.getInstance().getApi().search(code)
+                .enqueue(new Callback<GeneralResponse>() {
+                    @Override
+                    public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        if(response.isSuccessful() && response.body()!=null){
+                            cName = response.body().getName();
+                            cId = response.body().getId();
+                            cNumber = response.body().getNumber();
+                            cWallet = response.body().getWallet();
+                            name.setText(cName);
+
+                        }else if(response.code()==204){
+                            Toast.makeText(context, "کاربر وجود ندارد", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GeneralResponse> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    private void reg(String contractDate, String weddingDate, String sPhone, String price) {
         close.setEnabled(false);
         cancel.setEnabled(false);
         register.setEnabled(false);
@@ -151,14 +212,16 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
         setCanceledOnTouchOutside(false);
         setCancelable(false);
 
-        if(birthday.equals("انتخاب کنید")){
-            birthday="";
-        }else if(weddingDate.equals("انتخاب کنید")){
+        if(weddingDate.equals("انتخاب کنید")){
             weddingDate="";
         }
+        if(contractDate.equals("انتخاب کنید")){
+            contractDate="";
+        }
+
 
         RetrofitClient.getInstance().getApi()
-                .register(name,phone,sPhone,birthday,weddingDate,code,true)
+                .bride(cId,weddingDate,contractDate,sPhone,price)
                 .enqueue(new Callback<GeneralResponse>() {
                     @Override
                     public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {

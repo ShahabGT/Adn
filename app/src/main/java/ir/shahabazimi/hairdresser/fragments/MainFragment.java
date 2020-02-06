@@ -1,6 +1,7 @@
 package ir.shahabazimi.hairdresser.fragments;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -19,13 +20,14 @@ import android.view.WindowManager;
 import com.google.android.material.card.MaterialCardView;
 
 import ir.shahabazimi.hairdresser.R;
+import ir.shahabazimi.hairdresser.activities.BuyActivity;
 import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
 import ir.shahabazimi.hairdresser.dialogs.RegisterDialog;
 
 
 public class MainFragment extends Fragment {
 
-    private MaterialCardView reg,bride;
+    private MaterialCardView reg,bride,service;
 
 
 
@@ -44,6 +46,7 @@ public class MainFragment extends Fragment {
     private void init(View v){
         reg = v.findViewById(R.id.main_reg);
         bride = v.findViewById(R.id.main_bride);
+        service = v.findViewById(R.id.main_service);
 
 
         onClicks(v);
@@ -71,6 +74,12 @@ public class MainFragment extends Fragment {
             dialog.show();
             Window window = dialog.getWindow();
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        });
+
+        service.setOnClickListener(w->{
+            startActivity(new Intent(getContext(), BuyActivity.class));
+            getActivity().overridePendingTransition(R.anim.enter_right,R.anim.exit_left);
 
         });
 
