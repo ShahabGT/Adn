@@ -29,4 +29,22 @@ public class Utils {
         } catch (Exception e) {
         }
     }
+
+    public static String moneySeparator(String text) {
+
+        int len = text.length();
+        if(len>3) {
+            String res="";
+            while(len>3) {
+                res = ","+text.substring(len-3, len) + res;
+
+                len-=3;
+            }
+
+            res = text.substring(0,len)+res;
+            return res;
+        }else {
+            return text;
+        }
+    }
 }
