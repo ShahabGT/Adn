@@ -3,6 +3,8 @@ package ir.shahabazimi.hairdresser.data;
 import java.util.ArrayList;
 
 import ir.shahabazimi.hairdresser.models.GeneralResponse;
+import ir.shahabazimi.hairdresser.models.StatResponse;
+import ir.shahabazimi.hairdresser.models.StatResponse2;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -46,5 +48,18 @@ public interface Api {
     @POST("search.php")
     Call<GeneralResponse> search(
             @Field("code") String code
+    );
+
+    @FormUrlEncoded
+    @POST("getstats.php")
+    Call<StatResponse> getstats(
+            @Field("year") String year
+    );
+
+    @FormUrlEncoded
+    @POST("getstats2.php")
+    Call<StatResponse2> getstats2(
+            @Field("year") String year,
+            @Field("month") String month
     );
 }

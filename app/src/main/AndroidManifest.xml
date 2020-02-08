@@ -15,9 +15,12 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.BuyActivity"
-            android:windowSoftInputMode="stateHidden"
+        <activity android:name=".activities.StatsActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.BuyActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait">
@@ -29,7 +32,7 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package ir.shahabazimi.hairdresser.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,13 +23,16 @@ import com.google.android.material.card.MaterialCardView;
 
 import ir.shahabazimi.hairdresser.R;
 import ir.shahabazimi.hairdresser.activities.BuyActivity;
+import ir.shahabazimi.hairdresser.activities.StatsActivity;
 import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
 import ir.shahabazimi.hairdresser.dialogs.RegisterDialog;
 
 
 public class MainFragment extends Fragment {
 
-    private MaterialCardView reg,bride,service;
+    private MaterialCardView reg,bride,service,stats;
+    private Context context;
+    private FragmentActivity activity;
 
 
 
@@ -38,6 +43,8 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        this.context=getContext();
+        this.activity=getActivity();
         init(v);
 
 
@@ -47,6 +54,7 @@ public class MainFragment extends Fragment {
         reg = v.findViewById(R.id.main_reg);
         bride = v.findViewById(R.id.main_bride);
         service = v.findViewById(R.id.main_service);
+        stats = v.findViewById(R.id.main_stats);
 
 
         onClicks(v);
@@ -54,7 +62,7 @@ public class MainFragment extends Fragment {
 
     private void onClicks(View v){
         reg.setOnClickListener(w->{
-            RegisterDialog dialog = new RegisterDialog(getContext());
+            RegisterDialog dialog = new RegisterDialog(context);
             dialog.setCanceledOnTouchOutside(true);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
@@ -66,7 +74,7 @@ public class MainFragment extends Fragment {
         });
 
         bride.setOnClickListener(w->{
-            BrideDialog dialog = new BrideDialog(getContext());
+            BrideDialog dialog = new BrideDialog(context);
             dialog.setCanceledOnTouchOutside(true);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
@@ -78,8 +86,14 @@ public class MainFragment extends Fragment {
         });
 
         service.setOnClickListener(w->{
-            startActivity(new Intent(getContext(), BuyActivity.class));
-            getActivity().overridePendingTransition(R.anim.enter_right,R.anim.exit_left);
+            startActivity(new Intent(context, BuyActivity.class));
+           activity.overridePendingTransition(R.anim.enter_right,R.anim.exit_left);
+
+        });
+
+        stats.setOnClickListener(w->{
+            startActivity(new Intent(context, StatsActivity.class));
+            activity.overridePendingTransition(R.anim.enter_right,R.anim.exit_left);
 
         });
 
