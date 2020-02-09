@@ -158,7 +158,7 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
                 if (Utils.checkInternet(context))
                     reg(c,w,s,p);
                 else
-                    Toast.makeText(context, "لطفا دسترسی به اینترنت را چک کنید!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "لطفا دسترسی به اینترنت را بررسی کنید!", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -239,7 +239,7 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
                             Toast.makeText(context, "این شماره قبلا ثبت شده است", Toast.LENGTH_SHORT).show();
 
                         }else{
-                            Toast.makeText(context, "خطا لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "خطا! لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -252,7 +252,7 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
                         cancel.setEnabled(true);
                         register.setEnabled(true);
                         register.setText("ثبت نام");
-                        Toast.makeText(context, "خطا لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "خطا! لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
                     }
                 });
 

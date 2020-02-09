@@ -28,6 +28,7 @@ import ir.shahabazimi.hairdresser.activities.BuyActivity;
 import ir.shahabazimi.hairdresser.activities.StatsActivity;
 import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
 import ir.shahabazimi.hairdresser.dialogs.RegisterDialog;
+import ir.shahabazimi.hairdresser.dialogs.SmsDialog;
 
 
 public class MainFragment extends Fragment {
@@ -102,7 +103,14 @@ public class MainFragment extends Fragment {
         });
 
         sms.setOnClickListener(w->{
-
+            SmsDialog dialog = new SmsDialog(context);
+            dialog.setCanceledOnTouchOutside(true);
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            dialog.getWindow().setGravity(Gravity.CENTER);
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
         });
 

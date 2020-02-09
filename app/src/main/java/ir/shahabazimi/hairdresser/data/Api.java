@@ -71,4 +71,9 @@ public interface Api {
             @Field("month") String month,
             @Field("person") String person
     );
+
+    @FormUrlEncoded
+    @POST("sendsms.php")
+    Call<GeneralResponse> sendsms(
+            @Field("text") String text);
 }

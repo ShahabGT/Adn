@@ -250,6 +250,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:padding="8dp"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:src="@drawable/sms"

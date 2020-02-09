@@ -124,7 +124,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
                 if (Utils.checkInternet(context))
                     reg(n, c, b, w, p);
                 else
-                    Toast.makeText(context, "لطفا دسترسی به اینترنت را چک کنید!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "لطفا دسترسی به اینترنت را بررسی کنید!", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -175,7 +175,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
                             Toast.makeText(context, "این شماره قبلا ثبت شده است", Toast.LENGTH_SHORT).show();
 
                         }else{
-                            Toast.makeText(context, "خطا لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "خطا! لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -188,7 +188,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
                         cancel.setEnabled(true);
                         register.setEnabled(true);
                         register.setText("ثبت نام");
-                        Toast.makeText(context, "خطا لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "خطا! لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
                     }
                 });
 
