@@ -48,7 +48,7 @@ public class SmsDialog extends Dialog{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.dialog_bride);
+        setContentView(R.layout.dialog_sms);
         init();
     }
 
