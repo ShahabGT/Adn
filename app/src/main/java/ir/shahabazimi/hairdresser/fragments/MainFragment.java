@@ -21,6 +21,8 @@ import android.view.WindowManager;
 
 import com.google.android.material.card.MaterialCardView;
 
+import java.util.Objects;
+
 import ir.shahabazimi.hairdresser.R;
 import ir.shahabazimi.hairdresser.activities.BuyActivity;
 import ir.shahabazimi.hairdresser.activities.StatsActivity;
@@ -30,7 +32,7 @@ import ir.shahabazimi.hairdresser.dialogs.RegisterDialog;
 
 public class MainFragment extends Fragment {
 
-    private MaterialCardView reg,bride,service,stats;
+    private MaterialCardView reg,bride,service,stats,settings,sms;
     private Context context;
     private FragmentActivity activity;
 
@@ -55,16 +57,18 @@ public class MainFragment extends Fragment {
         bride = v.findViewById(R.id.main_bride);
         service = v.findViewById(R.id.main_service);
         stats = v.findViewById(R.id.main_stats);
+        settings = v.findViewById(R.id.main_setting);
+        sms = v.findViewById(R.id.main_sms);
 
 
-        onClicks(v);
+        onClicks();
     }
 
-    private void onClicks(View v){
+    private void onClicks(){
         reg.setOnClickListener(w->{
             RegisterDialog dialog = new RegisterDialog(context);
             dialog.setCanceledOnTouchOutside(true);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             dialog.getWindow().setGravity(Gravity.CENTER);
             dialog.show();
@@ -76,7 +80,7 @@ public class MainFragment extends Fragment {
         bride.setOnClickListener(w->{
             BrideDialog dialog = new BrideDialog(context);
             dialog.setCanceledOnTouchOutside(true);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             dialog.getWindow().setGravity(Gravity.CENTER);
             dialog.show();
@@ -94,6 +98,15 @@ public class MainFragment extends Fragment {
         stats.setOnClickListener(w->{
             startActivity(new Intent(context, StatsActivity.class));
             activity.overridePendingTransition(R.anim.enter_right,R.anim.exit_left);
+
+        });
+
+        sms.setOnClickListener(w->{
+
+
+        });
+
+        settings.setOnClickListener(w->{
 
         });
 

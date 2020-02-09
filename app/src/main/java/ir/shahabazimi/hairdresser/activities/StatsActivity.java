@@ -172,8 +172,11 @@ public class StatsActivity extends AppCompatActivity {
                                 }
                                 monthTitle.setText("آمار ماه "+month);
                                 monthCard.setVisibility(View.VISIBLE);
-                                monthAdapter = new MonthAdapter(response.body().getData());
+                                monthAdapter = new MonthAdapter(StatsActivity.this,response.body().getData(),eYear,selectedMonth+"");
                                 monthRecycler.setAdapter(monthAdapter);
+                            }
+                            else{
+                                monthCard.setVisibility(View.GONE);
                             }
 
                         }else {

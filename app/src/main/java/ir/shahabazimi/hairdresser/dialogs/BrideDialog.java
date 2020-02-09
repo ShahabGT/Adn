@@ -146,7 +146,7 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
             Utils.hideKeyboard(getOwnerActivity());
             String c = cDate.getText().toString();
             String w = wDate.getText().toString();
-            String s = sPhone.getText().toString();
+            String s = sPhone.getText().toString().replace(" ","");
             String p = price.getText().toString();
 
             if(cName.isEmpty()) {

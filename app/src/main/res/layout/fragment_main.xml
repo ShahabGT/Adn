@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.31" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -76,7 +76,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.675" />
+        app:layout_constraintGuide_percent="0.54" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.77" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_reg"
@@ -100,16 +106,16 @@
             android:orientation="vertical">
 
             <ImageView
-
+                android:padding="8dp"
+                android:tint="@android:color/black"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:src="@drawable/register" />
+                android:src="@drawable/sign" />
 
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:fontFamily="@font/vazir"
                 android:text="ثبت نام" />
         </LinearLayout>
@@ -144,7 +150,6 @@
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:fontFamily="@font/vazir"
                 android:text="عروس" />
         </LinearLayout>
@@ -160,7 +165,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:soundEffectsEnabled="true"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"
         app:layout_constraintLeft_toLeftOf="@id/guideline1"
         app:layout_constraintRight_toRightOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/guideline4">
@@ -174,14 +179,13 @@
             <ImageView
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:src="@drawable/service"
+                android:src="@drawable/services"
                 android:tint="@android:color/black" />
 
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:fontFamily="@font/vazir"
                 android:text="خدمات" />
         </LinearLayout>
@@ -197,7 +201,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:soundEffectsEnabled="true"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"
         app:layout_constraintLeft_toLeftOf="@id/guideline3"
         app:layout_constraintRight_toRightOf="@id/guideline2"
         app:layout_constraintTop_toBottomOf="@id/guideline4">
@@ -209,19 +213,92 @@
             android:orientation="vertical">
 
             <ImageView
+                android:padding="8dp"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:src="@drawable/stat"
+                android:src="@drawable/bar"
                 android:tint="@android:color/black" />
 
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:fontFamily="@font/vazir"
                 android:text="آمار" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/main_sms"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:soundEffectsEnabled="true"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/guideline1"
+        app:layout_constraintRight_toRightOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:src="@drawable/sms"
+                android:tint="@android:color/black" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:text="ارسال پیام" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/main_setting"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:soundEffectsEnabled="true"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/guideline3"
+        app:layout_constraintRight_toRightOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/guideline5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:padding="8dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:src="@drawable/settings"
+                android:tint="@android:color/black" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:text="تنظیمات" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

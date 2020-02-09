@@ -3,6 +3,7 @@ package ir.shahabazimi.hairdresser.data;
 import java.util.ArrayList;
 
 import ir.shahabazimi.hairdresser.models.GeneralResponse;
+import ir.shahabazimi.hairdresser.models.PersonResponse;
 import ir.shahabazimi.hairdresser.models.StatResponse;
 import ir.shahabazimi.hairdresser.models.StatResponse2;
 import retrofit2.Call;
@@ -61,5 +62,13 @@ public interface Api {
     Call<StatResponse2> getstats2(
             @Field("year") String year,
             @Field("month") String month
+    );
+
+    @FormUrlEncoded
+    @POST("getpersonstats.php")
+    Call<PersonResponse> getpersonstats(
+            @Field("year") String year,
+            @Field("month") String month,
+            @Field("person") String person
     );
 }

@@ -116,7 +116,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
             String c = code.getText().toString();
             String b = bDate.getText().toString();
             String w = wDate.getText().toString();
-            String p = phone.getText().toString();
+            String p = phone.getText().toString().replace(" ","");
 
             if (n.isEmpty() || p.isEmpty() || p.length() < 11) {
                 Toast.makeText(context, "لطفا نام و نام خانوادگی/ شماره تلفن را بررسی کنید", Toast.LENGTH_SHORT).show();
