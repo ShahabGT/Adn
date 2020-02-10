@@ -235,14 +235,14 @@ public class BuyActivity extends AppCompatActivity {
                             Toast.makeText(BuyActivity.this, "با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
                             onBackPressed();
                         }else
-                            Toast.makeText(BuyActivity.this, "خطا لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BuyActivity.this, "خطا! لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailure(Call<GeneralResponse> call, Throwable t) {
                         loading.setVisibility(View.GONE);
-                        Toast.makeText(BuyActivity.this, "خطا لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BuyActivity.this, "خطا! لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
                     }
                 });
 

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import ir.shahabazimi.hairdresser.models.GeneralResponse;
 import ir.shahabazimi.hairdresser.models.PersonResponse;
+import ir.shahabazimi.hairdresser.models.PointsResponse;
 import ir.shahabazimi.hairdresser.models.StatResponse;
 import ir.shahabazimi.hairdresser.models.StatResponse2;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface Api {
@@ -76,4 +78,16 @@ public interface Api {
     @POST("sendsms.php")
     Call<GeneralResponse> sendsms(
             @Field("text") String text);
+
+    @GET("getpoints.php")
+    Call<PointsResponse> getpoints();
+
+
+    @FormUrlEncoded
+    @POST("setpoints.php")
+    Call<GeneralResponse> setpoints(
+            @Field("point") String point,
+            @Field("wallet") String wallet
+
+    );
 }

@@ -25,6 +25,7 @@ import java.util.Objects;
 
 import ir.shahabazimi.hairdresser.R;
 import ir.shahabazimi.hairdresser.activities.BuyActivity;
+import ir.shahabazimi.hairdresser.activities.SettingsActivity;
 import ir.shahabazimi.hairdresser.activities.StatsActivity;
 import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
 import ir.shahabazimi.hairdresser.dialogs.RegisterDialog;
@@ -115,7 +116,8 @@ public class MainFragment extends Fragment {
         });
 
         settings.setOnClickListener(w->{
-
+            startActivity(new Intent(context, SettingsActivity.class));
+            activity.overridePendingTransition(R.anim.enter_right,R.anim.exit_left);
         });
 
     }
