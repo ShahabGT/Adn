@@ -250,7 +250,7 @@ public class SettingsActivity extends AppCompatActivity {
                             cId = response.body().getId();
                             cNumber = response.body().getNumber();
                             cPoints = response.body().getPoints();
-                            userName.setText(cName);
+                            userName.setText(cName+" "+cNumber);
                             userPoints.setText(cPoints);
 
 
