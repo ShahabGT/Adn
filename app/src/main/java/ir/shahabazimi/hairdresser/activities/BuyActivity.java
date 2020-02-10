@@ -179,6 +179,7 @@ public class BuyActivity extends AppCompatActivity {
     }
 
     private void searchCode(String code){
+        Utils.hideKeyboard(BuyActivity.this);
         customerDetails.setVisibility(View.GONE);
         customerDetails.setText("");
         cName="";
@@ -203,11 +204,15 @@ public class BuyActivity extends AppCompatActivity {
                         }else if(response.code()==204){
                             customerDetails.setVisibility(View.VISIBLE);
                             customerDetails.setText("کاربر وجود ندارد");
+                        }else{
+                            customerDetails.setVisibility(View.GONE);
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        customerDetails.setVisibility(View.GONE);
 
                     }
                 });

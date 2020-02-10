@@ -17,6 +17,12 @@ public class GeneralResponse {
 
     private String wallet;
 
+    private String points;
+
+    public String getPoints() {
+        return points;
+    }
+
     public String getMessage() {
         return message;
     }

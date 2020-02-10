@@ -90,4 +90,18 @@ public interface Api {
             @Field("wallet") String wallet
 
     );
+
+    @FormUrlEncoded
+    @POST("getuserpoints.php")
+    Call<GeneralResponse> getuserpoints(
+            @Field("code") String code
+    );
+
+    @FormUrlEncoded
+    @POST("setuserpoints.php")
+    Call<GeneralResponse> setuserpoints(
+            @Field("user_id") String userId,
+            @Field("points") String points
+
+    );
 }
