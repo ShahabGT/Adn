@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/main_header_title"
-            style="@style/TextAppearance.AppCompat.Display1"
+            style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/vazir"
@@ -108,8 +108,8 @@
             <ImageView
                 android:padding="8dp"
                 android:tint="@android:color/black"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:src="@drawable/sign" />
 
             <TextView
@@ -142,8 +142,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:src="@drawable/bride" />
 
             <TextView
@@ -177,8 +177,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:src="@drawable/services"
                 android:tint="@android:color/black" />
 
@@ -214,8 +214,8 @@
 
             <ImageView
                 android:padding="8dp"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:src="@drawable/bar"
                 android:tint="@android:color/black" />
 
@@ -251,8 +251,8 @@
 
             <ImageView
                 android:padding="8dp"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:src="@drawable/sms"
                 android:tint="@android:color/black" />
 
@@ -287,8 +287,8 @@
 
             <ImageView
                 android:padding="8dp"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:src="@drawable/settings"
                 android:tint="@android:color/black" />
 

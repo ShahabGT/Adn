@@ -87,7 +87,8 @@ public interface Api {
     @POST("setpoints.php")
     Call<GeneralResponse> setpoints(
             @Field("point") String point,
-            @Field("wallet") String wallet
+            @Field("wallet") String wallet,
+            @Field("point2") String point2
 
     );
 

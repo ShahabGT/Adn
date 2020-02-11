@@ -127,13 +127,13 @@
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
                 android:layout_marginRight="8dp"
                 android:fontFamily="@font/vazir"
                 android:text="امتیاز"
                 android:textColor="@color/purple"
+                app:layout_constraintBottom_toBottomOf="@+id/setting_points"
                 app:layout_constraintRight_toLeftOf="@id/setting_points"
-                app:layout_constraintTop_toBottomOf="@id/setting_points_card_title" />
+                app:layout_constraintTop_toTopOf="@id/setting_points" />
 
             <TextView
                 android:id="@+id/setting_wallet_title"
@@ -169,13 +169,56 @@
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
                 android:layout_marginRight="8dp"
                 android:fontFamily="@font/vazir"
                 android:text="درصد"
                 android:textColor="@color/purple"
+                app:layout_constraintBottom_toBottomOf="@+id/setting_wallet"
                 app:layout_constraintRight_toLeftOf="@id/setting_wallet"
-                app:layout_constraintTop_toBottomOf="@id/setting_points_title" />
+                app:layout_constraintTop_toTopOf="@id/setting_wallet" />
+
+            <TextView
+                android:id="@+id/setting_points2_title"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/vazir"
+                android:text="امتیاز استفاده از خدمت"
+                android:textColor="@color/purple"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/setting_wallet_title" />
+
+            <EditText
+                android:id="@+id/setting_points2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_shape"
+                android:fontFamily="@font/vazir"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="4"
+                android:padding="6dp"
+                android:singleLine="true"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="@+id/setting_points2_title"
+                app:layout_constraintLeft_toLeftOf="@id/guideline2"
+                app:layout_constraintRight_toRightOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/setting_points2_title" />
+
+            <TextView
+                android:id="@+id/setting_points2_title2"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/vazir"
+                android:text="امتیاز"
+                android:textColor="@color/purple"
+                app:layout_constraintBottom_toBottomOf="@id/setting_points2"
+                app:layout_constraintRight_toLeftOf="@id/setting_points"
+                app:layout_constraintTop_toTopOf="@id/setting_points2" />
 
             <ImageView
                 android:id="@+id/points_check"
@@ -190,7 +233,7 @@
                 android:tint="@android:color/holo_green_dark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/setting_wallet_title2" />
+                app:layout_constraintTop_toBottomOf="@+id/setting_points2_title2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

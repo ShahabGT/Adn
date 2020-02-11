@@ -22,7 +22,7 @@ import retrofit2.Response;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private EditText points, userPoints, userNewPoints, code, wallet;
+    private EditText points,points2, userPoints, userNewPoints, code, wallet;
     private ImageView pointsSave, userPointsSave;
     private TextView userName, userPointsTitle, userNewPointsTitle;
 
@@ -40,6 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void init() {
         points = findViewById(R.id.setting_points);
+        points2 = findViewById(R.id.setting_points2);
         wallet = findViewById(R.id.setting_wallet);
         pointsSave = findViewById(R.id.points_check);
 
@@ -115,12 +116,13 @@ public class SettingsActivity extends AppCompatActivity {
         pointsSave.setOnClickListener(z -> {
             Utils.hideKeyboard(SettingsActivity.this);
             String p = points.getText().toString().trim().replace(" ","");
+            String p2 = points2.getText().toString().trim().replace(" ","");
             String w = wallet.getText().toString().trim().replace(" ","");
-            if (p.isEmpty() || w.isEmpty()) {
+            if (p.isEmpty() || w.isEmpty() || p2.isEmpty()) {
                 Toast.makeText(this, "لطفا مقادیر امتیاز و کیف پول را بررسی کنید", Toast.LENGTH_SHORT).show();
             } else {
                 if (Utils.checkInternet(SettingsActivity.this))
-                    sendPoints(p, w);
+                    sendPoints(p, w,p2);
                 else
                     Toast.makeText(SettingsActivity.this, "لطفا دسترسی به اینترنت را بررسی کنید!", Toast.LENGTH_SHORT).show();
 
@@ -158,6 +160,7 @@ public class SettingsActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null && response.body().getData().size() > 0) {
                             points.setText(response.body().getData().get(0).getAmount());
                             wallet.setText(response.body().getData().get(1).getAmount());
+                            points2.setText(response.body().getData().get(2).getAmount());
 
                         } else {
                             Toast.makeText(SettingsActivity.this, "خطا! لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
@@ -173,9 +176,9 @@ public class SettingsActivity extends AppCompatActivity {
                 });
     }
 
-    private void sendPoints(String point, String wallet) {
+    private void sendPoints(String point, String wallet,String point2) {
         RetrofitClient.getInstance().getApi()
-                .setpoints(point, wallet)
+                .setpoints(point, wallet,point2)
                 .enqueue(new Callback<GeneralResponse>() {
                     @Override
                     public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
