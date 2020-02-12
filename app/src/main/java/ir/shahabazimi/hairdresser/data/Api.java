@@ -39,7 +39,7 @@ public interface Api {
     Call<GeneralResponse> buy(
             @Field("user_id") String userId,
             @Field("amount") String amount,
-            @Field("wallet") String walley,
+            @Field("wallet") String wallet,
             @Field("pay") String pay,
             @Field("title[]") ArrayList<String> title,
             @Field("price[]")ArrayList<String> price,
@@ -88,7 +88,8 @@ public interface Api {
     Call<GeneralResponse> setpoints(
             @Field("point") String point,
             @Field("wallet") String wallet,
-            @Field("point2") String point2
+            @Field("point2") String point2,
+            @Field("bride") String bride
 
     );
 

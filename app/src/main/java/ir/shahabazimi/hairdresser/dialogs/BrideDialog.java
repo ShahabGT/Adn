@@ -75,6 +75,39 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
     }
 
     private void onClicks() {
+        price.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                price.removeTextChangedListener(this);
+
+                String value = price.getText().toString();
+
+
+                if (!value.equals("")) {
+                    if (value.startsWith("0") && !value.startsWith("0.")) {
+                        price.setText("");
+                    }
+
+
+                    String str = price.getText().toString().replaceAll(",", "");
+                    price.setText(Utils.moneySeparator(str));
+                    price.setSelection(price.getText().toString().length());
+
+
+                }
+                price.addTextChangedListener(this);
+            }
+        });
 
         code.addTextChangedListener(new TextWatcher() {
             @Override
@@ -147,7 +180,7 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
             String c = cDate.getText().toString();
             String w = wDate.getText().toString();
             String s = sPhone.getText().toString().replace(" ","");
-            String p = price.getText().toString();
+            String p = price.getText().toString().replace(",","");
 
             if(cName.isEmpty()) {
                 Toast.makeText(context, "لطفا کد مشتری را وارد کنید", Toast.LENGTH_SHORT).show();
@@ -231,7 +264,7 @@ public class BrideDialog extends Dialog implements DatePickerDialog.OnDateSetLis
                         cancel.setEnabled(true);
                         register.setEnabled(true);
                         register.setText("ثبت نام");
-                        if(response.isSuccessful()){
+                        if(response.isSuccessful() ||(response.body()!=null && response.body().getMessage().equals("success") ) ){
                             Toast.makeText(context, "با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
                             dismiss();
 

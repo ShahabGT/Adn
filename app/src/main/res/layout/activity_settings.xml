@@ -72,14 +72,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.45" />
+                app:layout_constraintGuide_percent="0.5" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.25" />
+                app:layout_constraintGuide_percent="0.2" />
 
             <TextView
                 android:id="@+id/setting_points_card_title"
@@ -110,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/edit_shape"
+                android:digits="@string/number_digits"
                 android:fontFamily="@font/vazir"
                 android:gravity="center"
                 android:inputType="number"
@@ -153,6 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/edit_shape"
+                android:digits="@string/number_digits"
                 android:fontFamily="@font/vazir"
                 android:gravity="center"
                 android:inputType="number"
@@ -195,6 +197,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/edit_shape"
+                android:digits="@string/number_digits"
                 android:fontFamily="@font/vazir"
                 android:gravity="center"
                 android:inputType="number"
@@ -220,6 +223,49 @@
                 app:layout_constraintRight_toLeftOf="@id/setting_points"
                 app:layout_constraintTop_toTopOf="@id/setting_points2" />
 
+            <TextView
+                android:id="@+id/setting_bride_title"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/vazir"
+                android:text="هدیه عروس"
+                android:textColor="@color/purple"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/setting_points2_title2" />
+
+            <EditText
+                android:id="@+id/setting_bride"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_shape"
+                android:digits="@string/number_digits"
+                android:fontFamily="@font/vazir"
+                android:gravity="center"
+                android:inputType="number"
+                android:padding="6dp"
+                android:singleLine="true"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="@+id/setting_bride_title"
+                app:layout_constraintLeft_toLeftOf="@id/guideline2"
+                app:layout_constraintRight_toRightOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/setting_bride_title" />
+
+            <TextView
+                android:id="@+id/setting_bride_title2"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/vazir"
+                android:text="تومان"
+                android:textColor="@color/purple"
+                app:layout_constraintBottom_toBottomOf="@id/setting_bride"
+                app:layout_constraintRight_toLeftOf="@id/setting_bride"
+                app:layout_constraintTop_toTopOf="@id/setting_bride" />
+
             <ImageView
                 android:id="@+id/points_check"
                 android:layout_width="wrap_content"
@@ -233,7 +279,7 @@
                 android:tint="@android:color/holo_green_dark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/setting_points2_title2" />
+                app:layout_constraintTop_toBottomOf="@+id/setting_bride_title2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -281,12 +327,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_marginBottom="16dp"
                 android:id="@+id/setting_usercode_title"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/vazir"
                 android:text="کد 4 رقمی مشتری"
                 android:textColor="@color/purple"
@@ -374,6 +420,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/edit_shape"
+                android:digits="@string/number_digits"
                 android:fontFamily="@font/vazir"
                 android:gravity="center"
                 android:inputType="number"

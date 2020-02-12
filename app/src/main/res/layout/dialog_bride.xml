@@ -182,6 +182,7 @@
                 android:background="@drawable/edit_shape"
                 android:fontFamily="@font/vazir"
                 android:gravity="center"
+                android:digits="@string/number_digits"
                 android:inputType="number"
                 android:padding="6dp"
                 android:singleLine="true"

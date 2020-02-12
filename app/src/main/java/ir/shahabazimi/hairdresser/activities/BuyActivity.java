@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.shahabazimi.hairdresser.R;
+import ir.shahabazimi.hairdresser.classes.ConfirmInterface;
 import ir.shahabazimi.hairdresser.classes.Utils;
 import ir.shahabazimi.hairdresser.data.RetrofitClient;
 import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
@@ -98,7 +99,12 @@ public class BuyActivity extends AppCompatActivity {
 
             }else{
 
-                ConfirmDialog dialog = new ConfirmDialog(BuyActivity.this,cCode,cName,cWallet,String.valueOf(amount), this::buy);
+                ConfirmDialog dialog = new ConfirmDialog(BuyActivity.this, cCode, cName, cWallet, String.valueOf(amount), new ConfirmInterface() {
+                    @Override
+                    public void onClick(String amount, String wallet, String pay) {
+                        buy(amount,wallet,pay);
+                    }
+                });
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;

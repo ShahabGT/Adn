@@ -167,7 +167,7 @@ public class RegisterDialog extends Dialog implements DatePickerDialog.OnDateSet
                         cancel.setEnabled(true);
                         register.setEnabled(true);
                         register.setText("ثبت نام");
-                        if(response.isSuccessful()){
+                        if(response.isSuccessful() ||(response.body()!=null && response.body().getMessage().equals("success") ) ){
                             Toast.makeText(context, "با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
                             dismiss();
 

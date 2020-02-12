@@ -208,7 +208,7 @@
 
         <EditText
             android:fontFamily="@font/vazir"
-
+            android:digits="@string/number_digits"
             android:id="@+id/reg_use"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -218,7 +218,6 @@
             android:inputType="number"
             android:padding="6dp"
             android:singleLine="true"
-            android:text="0"
             app:layout_constraintBottom_toBottomOf="@+id/reg_use_title"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="@id/guideline"
