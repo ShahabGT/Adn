@@ -1,8 +1,5 @@
 package ir.shahabazimi.hairdresser.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,6 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -28,7 +28,6 @@ import ir.shahabazimi.hairdresser.R;
 import ir.shahabazimi.hairdresser.classes.ConfirmInterface;
 import ir.shahabazimi.hairdresser.classes.Utils;
 import ir.shahabazimi.hairdresser.data.RetrofitClient;
-import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
 import ir.shahabazimi.hairdresser.dialogs.ConfirmDialog;
 import ir.shahabazimi.hairdresser.models.FieldModel;
 import ir.shahabazimi.hairdresser.models.GeneralResponse;
@@ -42,11 +41,11 @@ public class BuyActivity extends AppCompatActivity {
     private TextView customerDetails;
     private MaterialCardView reg;
 
-    private String cName="";
-    private String cNumber="";
-    private String cId="";
-    private String cWallet="";
-    private String cCode="";
+    private String cName = "";
+    private String cNumber = "";
+    private String cId = "";
+    private String cWallet = "";
+    private String cCode = "";
 
     private LinearLayout layout;
 
@@ -64,11 +63,11 @@ public class BuyActivity extends AppCompatActivity {
     }
 
 
-    private void init(){
+    private void init() {
 
         data = new ArrayList<>();
-        search= findViewById(R.id.buy_code_code);
-        customerDetails= findViewById(R.id.buy_name);
+        search = findViewById(R.id.buy_code_code);
+        customerDetails = findViewById(R.id.buy_name);
         layout = findViewById(R.id.buy_info_linear);
         reg = findViewById(R.id.buy_reg);
         loading = findViewById(R.id.buy_progress_card);
@@ -78,31 +77,33 @@ public class BuyActivity extends AppCompatActivity {
         onClicks();
 
     }
-    private void onClicks(){
 
-        reg.setOnClickListener(w->{
+    private void onClicks() {
+
+        reg.setOnClickListener(w -> {
+            Utils.hideKeyboard(BuyActivity.this);
             data.clear();
-            long amount=0;
-            for(int i=0;i<layout.getChildCount();i++){
+            long amount = 0;
+            for (int i = 0; i < layout.getChildCount(); i++) {
                 FieldModel model = getData(layout.getChildAt(i));
-                if( model!=null) {
+                if (model != null) {
                     data.add(model);
-                    amount+=Long.parseLong(model.getPrice());
+                    amount += Long.parseLong(model.getPrice());
                 }
             }
 
-            if(data.size()==0){
+            if (data.size() == 0) {
 
                 Toast.makeText(this, "لطفا لیست خدمات را کامل کنید", Toast.LENGTH_SHORT).show();
-            }else if(cId.isEmpty()){
+            } else if (cId.isEmpty()) {
                 Toast.makeText(this, "لطفا شماره مشتری را وارد کنید", Toast.LENGTH_SHORT).show();
 
-            }else{
+            } else {
 
                 ConfirmDialog dialog = new ConfirmDialog(BuyActivity.this, cCode, cName, cWallet, String.valueOf(amount), new ConfirmInterface() {
                     @Override
                     public void onClick(String amount, String wallet, String pay) {
-                        buy(amount,wallet,pay);
+                        buy(amount, wallet, pay);
                     }
                 });
                 dialog.setCanceledOnTouchOutside(true);
@@ -125,92 +126,125 @@ public class BuyActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length()==4){
+                if (s.length() == 4) {
                     searchCode(s.toString());
-                }else{
-                    cName="";
-                    cNumber="";
-                    cId="";
-                    cWallet="";
-                    cCode="";
+                } else {
+                    cName = "";
+                    cNumber = "";
+                    cId = "";
+                    cWallet = "";
+                    cCode = "";
                     customerDetails.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()==4){
+                if (s.length() == 4) {
                     searchCode(s.toString());
 
-                }else{
-                    cName="";
-                    cNumber="";
-                    cId="";
-                    cWallet="";
-                    cCode="";
+                } else {
+                    cName = "";
+                    cNumber = "";
+                    cId = "";
+                    cWallet = "";
+                    cCode = "";
                     customerDetails.setVisibility(View.GONE);
 
                 }
             }
         });
 
-        findViewById(R.id.buy_back).setOnClickListener(w->onBackPressed());
+        findViewById(R.id.buy_back).setOnClickListener(w -> onBackPressed());
 
     }
 
-    private FieldModel getData(View v){
-       String title =((EditText) v.findViewById(R.id.field_title)).getText().toString() ;
-        String price = ((EditText) v.findViewById(R.id.field_price)).getText().toString() ;
-        String person = ((EditText) v.findViewById(R.id.field_person)).getText().toString() ;
+    private FieldModel getData(View v) {
+        String title = ((EditText) v.findViewById(R.id.field_title)).getText().toString().trim();
+        String price = ((EditText) v.findViewById(R.id.field_price)).getText().toString().replace(",", "");
+        String person = ((EditText) v.findViewById(R.id.field_person)).getText().toString().trim();
 
-       if(!title.isEmpty() && !price.isEmpty() && !person.isEmpty()){
-           return new FieldModel(title,price,person);
-       }
-       return null;
+        if (!title.isEmpty() && !price.isEmpty() && !person.isEmpty()) {
+            return new FieldModel(title, price, person);
+        }
+        return null;
     }
 
     public void onAddField(View v) {
         Utils.hideKeyboard(BuyActivity.this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View rowView = inflater.inflate(R.layout.field, null);
+        EditText payField = rowView.findViewById(R.id.field_price);
+        payField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                payField.removeTextChangedListener(this);
+
+                String value = payField.getText().toString();
+
+
+                if (!value.equals("")) {
+                    if (value.startsWith("0") && !value.startsWith("0.")) {
+                        payField.setText("");
+                    }
+
+
+                    String str = payField.getText().toString().replaceAll(",", "");
+                    payField.setText(Utils.moneySeparator(str));
+                    payField.setSelection(payField.getText().toString().length());
+
+                }
+                payField.addTextChangedListener(this);
+            }
+        });
         // Add the new row before the add field button.
-        if(layout.getChildCount()==0)
+        if (layout.getChildCount() == 0)
             layout.addView(rowView, 0);
         else
-        layout.addView(rowView, layout.getChildCount() );
+            layout.addView(rowView, layout.getChildCount());
     }
 
     public void onDelete(View v) {
         layout.removeView((View) v.getParent());
     }
 
-    private void searchCode(String code){
+    private void searchCode(String code) {
         Utils.hideKeyboard(BuyActivity.this);
         customerDetails.setVisibility(View.GONE);
         customerDetails.setText("");
-        cName="";
-        cNumber="";
-        cId="";
-        cWallet="";
-        cCode="";
+        cName = "";
+        cNumber = "";
+        cId = "";
+        cWallet = "";
+        cCode = "";
 
 
         RetrofitClient.getInstance().getApi().search(code)
                 .enqueue(new Callback<GeneralResponse>() {
                     @Override
                     public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-                        if(response.isSuccessful() && response.body()!=null){
+                        if (response.isSuccessful() && response.body() != null) {
                             customerDetails.setVisibility(View.VISIBLE);
                             cName = response.body().getName();
                             cId = response.body().getId();
                             cNumber = response.body().getNumber();
                             cWallet = response.body().getWallet();
-                            cCode=code;
-                            customerDetails.setText(cName+" "+cNumber);
-                        }else if(response.code()==204){
+                            cCode = code;
+                            customerDetails.setText(cName + " " + cNumber);
+                        } else if (response.code() == 204) {
                             customerDetails.setVisibility(View.VISIBLE);
                             customerDetails.setText("کاربر وجود ندارد");
-                        }else{
+                        } else {
                             customerDetails.setVisibility(View.GONE);
 
                         }
@@ -224,28 +258,29 @@ public class BuyActivity extends AppCompatActivity {
                 });
     }
 
-    private void buy(String amount,String wallet,String pay){
+    private void buy(String amount, String wallet, String pay) {
+        Utils.hideKeyboard(BuyActivity.this);
         loading.setVisibility(View.VISIBLE);
 
         ArrayList<String> titles = new ArrayList<>();
         ArrayList<String> price = new ArrayList<>();
         ArrayList<String> person = new ArrayList<>();
 
-        for(FieldModel m : data){
+        for (FieldModel m : data) {
             titles.add(m.getTitle());
             price.add(m.getPrice());
             person.add(m.getPerson());
         }
 
         RetrofitClient.getInstance().getApi()
-                .buy(cId,amount,wallet,pay,titles,price,person)
+                .buy(cId, amount, wallet, pay, titles, price, person)
                 .enqueue(new Callback<GeneralResponse>() {
                     @Override
                     public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Toast.makeText(BuyActivity.this, "با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
                             onBackPressed();
-                        }else
+                        } else
                             Toast.makeText(BuyActivity.this, "خطا! لطفا دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
 
                     }

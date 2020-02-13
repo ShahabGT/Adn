@@ -28,7 +28,7 @@
 
     <EditText
         android:id="@+id/field_price"
-
+        android:digits="@string/number_digits"
         style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
