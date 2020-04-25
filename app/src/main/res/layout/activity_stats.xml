@@ -94,7 +94,7 @@
                 android:maxLength="4"
                 android:padding="6dp"
                 android:singleLine="true"
-                android:text="1398"
+                android:text="1399"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/stats_search_title"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -336,7 +336,6 @@
                 android:fontFamily="@font/vazir"
                 android:text="کد 4 رقمی مشتری"
                 android:textColor="@color/purple"
-                app:layout_constraintBottom_toBottomOf="@+id/buy_code_code"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/setting_userpoints_card_title" />
 
