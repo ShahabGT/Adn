@@ -10,15 +10,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
-
 import ir.shahabazimi.hairdresser.R;
 import ir.shahabazimi.hairdresser.classes.Utils;
-import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
 import ir.shahabazimi.hairdresser.dialogs.PersonDialog;
 import ir.shahabazimi.hairdresser.models.DataModel2;
 
@@ -29,31 +25,35 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.ViewHolder> 
     private String year;
     private String month;
 
-    public MonthAdapter(Context context,List<DataModel2> data,String year,String month){
-        this.data=data;
-        this.context=context;
+    public MonthAdapter(Context context, List<DataModel2> data, String year, String month) {
+        this.data = data;
+        this.context = context;
         this.year = year;
-        this.month=month;
+        this.month = month;
 
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_month,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_month, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
-            DataModel2 model = data.get(position);
+        DataModel2 model = data.get(position);
 
-            h.name.setText("نام فروشنده: "+model.getName());
-            h.count.setText("تعداد خدمات: "+model.getPcount());
-            h.price.setText("مبلغ کل خدمات: "+Utils.moneySeparator(model.getPsum()));
+        if (position == 0)
+            h.name.setText(model.getName());
+        else
+            h.name.setText("نام فروشنده: " + model.getName());
 
-            h.itemView.setOnClickListener(w->{
+        h.count.setText("تعداد خدمات: " + model.getPcount());
+        h.price.setText("مبلغ کل خدمات: " + Utils.moneySeparator(model.getPsum()));
 
-                PersonDialog dialog = new PersonDialog(context,model.getName(),year,month);
+        h.itemView.setOnClickListener(w -> {
+            if (position != 0) {
+                PersonDialog dialog = new PersonDialog(context, model.getName(), year, month);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
@@ -61,9 +61,9 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.ViewHolder> 
                 dialog.show();
                 Window window = dialog.getWindow();
                 window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            }
 
-
-            });
+        });
 
 
     }
@@ -73,9 +73,9 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.ViewHolder> 
         return data.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView name,count,price;
+        private TextView name, count, price;
 
 
         ViewHolder(@NonNull View v) {
