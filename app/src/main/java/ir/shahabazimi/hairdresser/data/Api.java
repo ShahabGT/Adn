@@ -7,6 +7,7 @@ import ir.shahabazimi.hairdresser.models.PersonResponse;
 import ir.shahabazimi.hairdresser.models.PointsResponse;
 import ir.shahabazimi.hairdresser.models.StatResponse;
 import ir.shahabazimi.hairdresser.models.StatResponse2;
+import ir.shahabazimi.hairdresser.models.UserResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -106,4 +107,8 @@ public interface Api {
             @Field("points") String points
 
     );
+
+    @FormUrlEncoded
+    @GET("getusers.php")
+    Call<UserResponse> getusers();
 }

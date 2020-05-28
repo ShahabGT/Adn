@@ -1,14 +1,18 @@
 package ir.shahabazimi.hairdresser.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -19,9 +23,12 @@ import com.google.android.material.card.MaterialCardView;
 
 import ir.shahabazimi.hairdresser.R;
 import ir.shahabazimi.hairdresser.adapters.MonthAdapter;
+import ir.shahabazimi.hairdresser.adapters.ViewPagerAdapter;
 import ir.shahabazimi.hairdresser.adapters.YearAdapter;
 import ir.shahabazimi.hairdresser.classes.Utils;
 import ir.shahabazimi.hairdresser.data.RetrofitClient;
+import ir.shahabazimi.hairdresser.fragments.MonthFragment;
+import ir.shahabazimi.hairdresser.fragments.YearFragment;
 import ir.shahabazimi.hairdresser.models.StatResponse;
 import ir.shahabazimi.hairdresser.models.StatResponse2;
 import retrofit2.Call;
@@ -30,15 +37,14 @@ import retrofit2.Response;
 
 public class StatsActivity extends AppCompatActivity {
 
-    private RecyclerView yearRecycler,monthRecycler;
-    private YearAdapter yearAdapter;
-    private MonthAdapter monthAdapter;
     private EditText year;
     private ImageView check;
     private Spinner month;
     private int selectedMonth=1;
     private MaterialCardView monthCard,yearCard;
-    private TextView monthTitle,yearTitle;
+
+    private ViewPagerAdapter pagerAdapter;
+    private ViewPager2 viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +56,7 @@ public class StatsActivity extends AppCompatActivity {
 
 
     private void init(){
-        monthTitle = findViewById(R.id.stats_month_title);
-        yearTitle = findViewById(R.id.stats_year_title);
+        viewPager = findViewById(R.id.stats_viewpager);
 
         monthCard = findViewById(R.id.stats_month_card);
         yearCard = findViewById(R.id.stats_year_card);
@@ -64,16 +69,9 @@ public class StatsActivity extends AppCompatActivity {
                 R.array.months, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         month.setAdapter(adapter);
-
-        yearRecycler = findViewById(R.id.stats_year_recycler);
-        yearRecycler.setLayoutManager(new LinearLayoutManager(this));
-
-        monthRecycler = findViewById(R.id.stats_month_recycler);
-        monthRecycler.setLayoutManager(new LinearLayoutManager(this));
         onClicks();
 
     }
-
     private void onClicks(){
 
         findViewById(R.id.stat_back).setOnClickListener(w->onBackPressed());
@@ -97,18 +95,9 @@ public class StatsActivity extends AppCompatActivity {
             }
             if(Utils.checkInternet(this)) {
                 getYearStats(year.getText().toString());
-                getMonthStats(year.getText().toString(),selectedMonth);
-
             }else{
                 Toast.makeText(this, "لطفا اتصال به اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
             }
-
-
-
-
-
-
-
         });
 
 
@@ -169,10 +158,13 @@ public class StatsActivity extends AppCompatActivity {
                                        month="کل";
                                         break;
                                 }
-                                monthTitle.setText("آمار ماه "+month);
-                                monthCard.setVisibility(View.VISIBLE);
-                                monthAdapter = new MonthAdapter(StatsActivity.this,response.body().getData(),eYear,selectedMonth+"");
-                                monthRecycler.setAdapter(monthAdapter);
+                                MonthFragment monthFragment = new MonthFragment();
+                                monthFragment.setMonthName(month);
+                                monthFragment.setData(response.body().getData());
+                                monthFragment.setYear(eYear);
+                                monthFragment.setMonth(selectedMonth+"");
+                                pagerAdapter.addFragment(monthFragment);
+
                             }
                             else{
                                 monthCard.setVisibility(View.GONE);
@@ -202,10 +194,15 @@ public class StatsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<StatResponse> call, Response<StatResponse> response) {
                         if(response.isSuccessful()){
-                            yearTitle.setText("آمار سال "+year);
-                            yearCard.setVisibility(View.VISIBLE);
-                            yearAdapter = new YearAdapter(response.body().getData());
-                            yearRecycler.setAdapter(yearAdapter);
+                            pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
+                            viewPager.setAdapter(pagerAdapter);
+                            YearFragment yearFragment = new YearFragment();
+                            yearFragment.setYearName(year);
+                            yearFragment.setData(response.body().getData());
+                            pagerAdapter.addFragment(yearFragment);
+                            viewPager.setCurrentItem(0);
+                            getMonthStats(year,selectedMonth);
+
                         }else {
                             yearCard.setVisibility(View.GONE);
                             monthCard.setVisibility(View.GONE);

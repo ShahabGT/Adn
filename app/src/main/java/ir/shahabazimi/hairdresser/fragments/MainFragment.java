@@ -27,6 +27,7 @@ import ir.shahabazimi.hairdresser.R;
 import ir.shahabazimi.hairdresser.activities.BuyActivity;
 import ir.shahabazimi.hairdresser.activities.SettingsActivity;
 import ir.shahabazimi.hairdresser.activities.StatsActivity;
+import ir.shahabazimi.hairdresser.activities.UsersActivity;
 import ir.shahabazimi.hairdresser.dialogs.BrideDialog;
 import ir.shahabazimi.hairdresser.dialogs.RegisterDialog;
 import ir.shahabazimi.hairdresser.dialogs.SmsDialog;
@@ -34,7 +35,7 @@ import ir.shahabazimi.hairdresser.dialogs.SmsDialog;
 
 public class MainFragment extends Fragment {
 
-    private MaterialCardView reg,bride,service,stats,settings,sms;
+    private MaterialCardView reg,bride,service,stats,settings,sms,users;
     private Context context;
     private FragmentActivity activity;
 
@@ -61,6 +62,7 @@ public class MainFragment extends Fragment {
         stats = v.findViewById(R.id.main_stats);
         settings = v.findViewById(R.id.main_setting);
         sms = v.findViewById(R.id.main_sms);
+        users = v.findViewById(R.id.main_users);
 
 
         onClicks();
@@ -112,6 +114,12 @@ public class MainFragment extends Fragment {
             dialog.show();
             Window window = dialog.getWindow();
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        });
+
+        users.setOnClickListener(w->{
+            startActivity(new Intent(context, UsersActivity.class));
+            activity.overridePendingTransition(R.anim.enter_right,R.anim.exit_left);
 
         });
 

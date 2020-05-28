@@ -12,6 +12,9 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.card.MaterialCardView;
+
 import java.util.List;
 import ir.shahabazimi.hairdresser.R;
 import ir.shahabazimi.hairdresser.classes.Utils;
@@ -43,10 +46,16 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
         DataModel2 model = data.get(position);
 
-        if (position == 0)
+        if (position == 0) {
             h.name.setText(model.getName());
-        else
+
+            h.card.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary2));
+
+        }else {
             h.name.setText("نام فروشنده: " + model.getName());
+            h.card.setCardBackgroundColor(context.getResources().getColor(R.color.mdtp_white));
+
+        }
 
         h.count.setText("تعداد خدمات: " + model.getPcount());
         h.price.setText("مبلغ کل خدمات: " + Utils.moneySeparator(model.getPsum()));
@@ -76,10 +85,12 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name, count, price;
+        private MaterialCardView card;
 
 
         ViewHolder(@NonNull View v) {
             super(v);
+            card = v.findViewById(R.id.month_card);
             name = v.findViewById(R.id.month_title);
             count = v.findViewById(R.id.month_count);
             price = v.findViewById(R.id.month_price);

@@ -56,6 +56,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1xx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -167,7 +180,7 @@
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@id/guideline5"
         app:layout_constraintLeft_toLeftOf="@id/guideline1"
-        app:layout_constraintRight_toRightOf="@id/guideline3"
+        app:layout_constraintRight_toRightOf="@id/guideline1x"
         app:layout_constraintTop_toBottomOf="@id/guideline4">
 
         <LinearLayout
@@ -177,8 +190,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/services"
                 android:tint="@android:color/black" />
 
@@ -192,6 +205,43 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/main_users"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:soundEffectsEnabled="true"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"
+        app:layout_constraintLeft_toLeftOf="@id/guideline1x"
+        app:layout_constraintRight_toRightOf="@id/guideline1xx"
+        app:layout_constraintTop_toBottomOf="@id/guideline4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/users"
+                android:tint="@android:color/black" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vazir"
+                android:text="کاربران" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_stats"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -202,7 +252,7 @@
         android:soundEffectsEnabled="true"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@id/guideline5"
-        app:layout_constraintLeft_toLeftOf="@id/guideline3"
+        app:layout_constraintLeft_toLeftOf="@id/guideline1xx"
         app:layout_constraintRight_toRightOf="@id/guideline2"
         app:layout_constraintTop_toBottomOf="@id/guideline4">
 
@@ -214,8 +264,8 @@
 
             <ImageView
                 android:padding="8dp"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/bar"
                 android:tint="@android:color/black" />
 
